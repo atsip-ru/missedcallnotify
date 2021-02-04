@@ -2,7 +2,7 @@
 	<rawname>missedcallnotify</rawname>
 	<type>setup</type>
 	<name>Missed Call Notifications Telegram</name>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<publisher>Madji</publisher>
 	<license>GPLv3+</license>
 	<category>Applications</category>

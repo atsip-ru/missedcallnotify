@@ -10,15 +10,12 @@
 		0.1.1 FIX sip iax2 extensions
 		*0.1* Initial
 	</changelog>
-	<description>This will allow notifications to be sent to users if they have missed a call to mesenger Telegram
+	<description>This will allow notifications to be sent to users if they have missed a call to messenger Telegram
 	</description>
 	<depends>
-		<engine>asterisk 1.8</engine>
+		<engine>asterisk 13.0</engine>
 		<version>0.1.1</version>
 		<module>core</module>
 	</depends>
-	<location>https://tex-host.ru/freepbx/modules/missedcallnotify-0.1.tgz</location>
-
-
-
+	<location>https://github.com/krote5k/missedcallnotify/archive/0.1.1.tar.gz</location>
 </module>

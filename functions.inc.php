@@ -60,7 +60,7 @@ function missedcallnotify_get_config($engine) {
   $ext->add($mcontext,$exten,'', new ext_noop('CALLERID(name): ${CALLERID(name)}'));
   $ext->add($mcontext,$exten,'', new ext_noop('DialStatus: ${DIALSTATUS}'));
   $ext->add($mcontext,$exten,'', new ext_noop('VMSTATUS: ${VMSTATUS}'));
-  
+
   $ext->add($mcontext,$exten,'', new ext_execif('$[$["${DB(AMPUSER/${EXTTOCALL}/missedcallnotify/status)}"=="enabled" & ["${DIALSTATUS}" == "CANCEL" | "${DIALSTATUS}" == "BUSY" | "${DIALSTATUS}" == "NOANSWER" | "${DIALSTATUS}" == "CHANUNAVAIL"]] && $["${VMSTATUS}" == "FAILED" | "${VMSTATUS}" == ""]]','System','curl -s -X POST https://api.telegram.org/bot${DB(AMPUSER/${EXTTOCALL}/missedcallnotify/bot)}/sendMessage -d parse_mode=html -d text="Пропущенный вызов: \nНомер ${CALLERID(num)}\nИмя:${CALLERID(name)}" -d chat_id=${DB(AMPUSER/${EXTTOCALL}/missedcallnotify/telegram)}'));
   $ext->add($mcontext,$exten,'', new ext_execif('$[$["${DB(AMPUSER/${EXTTOCALL}/missedcallnotify/status)}"=="enabled" & ["${DIALSTATUS}" == "CANCEL" | "${DIALSTATUS}" == "BUSY" | "${DIALSTATUS}" == "NOANSWER" | "${DIALSTATUS}" == "CHANUNAVAIL"]] && $["${VMSTATUS}" == "SUCCESS"]]','System','curl -s -X POST https://api.telegram.org/bot${DB(AMPUSER/${EXTTOCALL}/missedcallnotify/bot)}/sendMessage -d parse_mode=html -d text="Пропущенный вызов: \nНомер ${CALLERID(num)}\nИмя:${CALLERID(name)}\nОставлено голосовое сообщение." -d chat_id=${DB(AMPUSER/${EXTTOCALL}/missedcallnotify/telegram)}'));
 
@@ -113,13 +113,13 @@ function missedcallnotify_configpageload() {
   $extdisplay = isset($_REQUEST['extdisplay'])?$_REQUEST['extdisplay']:null;
 
   $mcn = missedcallnotify_getall($extdisplay);
-  $section = _('Уведомления о пропущенных Вызовах');
+  $section = _('Уведомления о пропущенных вызовах');
   $missedcallnotify_label =      _("Уведомления");
-  $missedcallnotify_telegram_label =    _("Telergram ID");
-  $missedcallnotify_bot_label =    _("Токен телеграм бота");
+  $missedcallnotify_telegram_label =    _("Telegram ID");
+  $missedcallnotify_bot_label =    _("Токен телеграм-бота");
   $missedcallnotify_tt = _("Включить уведомление о пропущенных");
-  $missedcallnotify_pt = _("Здесь указывается id пользователя телеграмм(личный) или id чата общего");
-  
+  $missedcallnotify_pt = _("Здесь указывается id пользователя телеграмм (личный) или id общего чата");
+
   $currentcomponent->addguielem($section, new gui_selectbox('missedcallnotify_status', $currentcomponent->getoptlist('missedcallnotify_status'), $mcn['missedcallnotify_status'], $missedcallnotify_label, $missedcallnotify_tt, '', false));
   $currentcomponent->addguielem($section, new gui_textbox('missedcallnotify_bot', $mcn['missedcallnotify_bot'],$missedcallnotify_bot_label, '', '' , false));
   $currentcomponent->addguielem($section, new gui_textbox('missedcallnotify_telegram', $mcn['missedcallnotify_telegram'],$missedcallnotify_telegram_label, $missedcallnotify_pt, '' , false));

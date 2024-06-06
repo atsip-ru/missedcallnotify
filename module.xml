@@ -18,5 +18,5 @@
 		<version>0.1.2</version>
 		<module>core</module>
 	</depends>
-	<location>https://github.com/krote5k/missedcallnotify/archive/0.1.2.tar.gz</location>
+	<location>https://github.com/atsip-ru/missedcallnotify/archive/0.1.2.tar.gz</location>
 </module>
